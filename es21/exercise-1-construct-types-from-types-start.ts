@@ -15,7 +15,7 @@ interface Country {
 
 type PartialCountry = Country;
 
-const countryA: PartialCountry = {
+const countryA: Partial<PartialCountry> = {
     code: "CN",
     population: 1_412_600_000,
 };
@@ -26,10 +26,11 @@ const countryA: PartialCountry = {
 
 type CompleteCountry = Country;
 
-const countryB: CompleteCountry = {
+const countryB: Required<CompleteCountry> = {
     name: "Greece",
     code: "GR",
     languages: ["Greek"],
+    currency: "",
     population: 10_678_632,
 };
 
@@ -39,14 +40,14 @@ const countryB: CompleteCountry = {
 
 type ReadonlyCountry = Country;
 
-const countryC: ReadonlyCountry = {
+const countryC: Readonly<ReadonlyCountry> = {
     name: "Italy",
     code: "IT",
     languages: ["Italian"],
     population: 60_317_116,
 };
 
-countryC.population = 60_317_117;
+// countryC.population = 60_317_117;
 
 console.log(countryC);
 
@@ -56,7 +57,7 @@ console.log(countryC);
 
 type CountryWithPopulation = Country;
 
-const countryD: CountryWithPopulation = {
+const countryD: Pick<CountryWithPopulation, "name" | "code" | "population"> = {
     name: "New Zealand",
     code: "NZ",
     population: 5_135_300,
@@ -67,7 +68,7 @@ const countryD: CountryWithPopulation = {
 
 type CountryWithoutPopulation = Country;
 
-const countryE: CountryWithoutPopulation = {
+const countryE: Omit<CountryWithoutPopulation, "population"> = {
     name: "Thailand",
     code: "TH",
     languages: ["Thai", "Isan", "Kam Mueang", "Pak Tai", "Malay"],
